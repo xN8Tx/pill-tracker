@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pills",
+  "info": {
+    "singularName": "pill",
+    "pluralName": "pills",
+    "displayName": "Pill",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "fullCount": {
+      "type": "integer"
+    },
+    "dailyCount": {
+      "type": "decimal"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "pills"
+    }
+  }
+}

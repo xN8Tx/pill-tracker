@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "docker compose -f ./config/dev/docker-compose.yaml up --build -d",
+    "start": "./config/prod/start.sh",
+    "prepare": "husky",
+    "lint:client": "cd app/client && yarn lint",
+    "lint": "yarn lint:client",
+    "tsc:client": "cd app/client && npx tsc",
+    "tsc:server": "cd app/strapi && npx tsc",
+    "tsc": "yarn tsc:client && yarn tsc:server",
+    "test:client": "cd app/client && yarn test",
+    "test": "yarn test:client"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
