@@ -4,9 +4,7 @@ import type { CreateCalendar, Calendar } from "../../types";
 import { http } from "@/shared/api";
 
 export const createCalendar = async (data: CreateCalendar) => {
-  const response = await http.post<StrapiResponse<Calendar>>("/courses", {
-    data,
-  });
+  const response = await http.post<StrapiResponse<Calendar>>("/courses", data);
 
   if (response.status !== 200) {
     throw new Error(

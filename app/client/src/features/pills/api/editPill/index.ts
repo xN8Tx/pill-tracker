@@ -12,7 +12,7 @@ export const editPill = async ({
 }) => {
   const response = await http.put<StrapiResponse<Pill>>(
     `/pills/${documentId}`,
-    { data },
+    data,
   );
 
   if (response.status !== 200) {

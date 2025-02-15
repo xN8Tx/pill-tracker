@@ -12,7 +12,7 @@ export const editCalendar = async ({
 }) => {
   const response = await http.put<StrapiResponse<Calendar>>(
     `/courses/${documentId}`,
-    { data },
+    data,
   );
 
   if (response.status !== 200) {
