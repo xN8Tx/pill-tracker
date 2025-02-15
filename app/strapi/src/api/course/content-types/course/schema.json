@@ -13,22 +13,26 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "icon": {
       "type": "string"
     },
     "startDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "courses"
+      "inversedBy": "courses",
+      "required": true
     },
     "days": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     }
   }
 }

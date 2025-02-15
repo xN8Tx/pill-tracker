@@ -13,22 +13,27 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "startDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "fullCount": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "dailyCount": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "pills"
+      "inversedBy": "pills",
+      "required": true
     }
   }
 }
