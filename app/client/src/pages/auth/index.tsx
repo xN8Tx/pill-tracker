@@ -3,15 +3,13 @@ import { lazy, Suspense } from "react";
 
 import { LogoutPage } from "./ui/LogoutPage";
 import { Skeleton } from "./ui/Skeleton";
+import { Layout } from "./ui/Layout";
 
 const LoginPage = lazy(() =>
   import("./ui/LoginPage").then((mod) => ({ default: mod.LoginPage })),
 );
 const RegisterPage = lazy(() =>
   import("./ui/RegisterPage").then((mod) => ({ default: mod.RegisterPage })),
-);
-const Layout = lazy(() =>
-  import("./ui/Layout").then((mod) => ({ default: mod.Layout })),
 );
 
 export const authRouter: RouteObject = {

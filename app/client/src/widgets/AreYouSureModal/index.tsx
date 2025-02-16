@@ -1,5 +1,8 @@
-import { Button, Modal } from "@/shared/ui";
 import React from "react";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+
+import { Button, Modal } from "@/shared/ui";
 
 interface AreYouSureModalProps {
   children: React.ReactNode;
@@ -21,8 +24,20 @@ export const AreYouSureModal = ({
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
   const agreeHandler = async () => {
-    await action();
-    setIsModalOpen(false);
+    try {
+      await action();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data.error.message ?? "Упс, что-то пошло не так",
+        );
+      } else {
+        toast.error("Упс, что-то пошло не так");
+      }
+      console.log(error);
+    } finally {
+      setIsModalOpen(false);
+    }
   };
 
   const disagreeHandler = () => {

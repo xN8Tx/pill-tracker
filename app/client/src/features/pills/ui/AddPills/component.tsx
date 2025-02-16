@@ -28,10 +28,12 @@ export const AddPills = () => {
 
   const { isLoading, mutateAsync } = useCreatePill();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = async (data: CreatePills) => {
     try {
       await mutateAsync(data);
+      setIsModalOpen(false);
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorMessage(
@@ -44,7 +46,11 @@ export const AddPills = () => {
   };
 
   return (
-    <Modal.Root className="h-full">
+    <Modal.Root
+      className="h-full"
+      isModalOpen={isModalOpen}
+      setModalOpen={setIsModalOpen}
+    >
       <Modal.Trigger variant={"outline"} className="rounded-2xl h-full">
         <Plus />
       </Modal.Trigger>

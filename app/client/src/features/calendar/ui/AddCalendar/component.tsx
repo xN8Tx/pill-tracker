@@ -21,10 +21,12 @@ export const AddCalendar = () => {
 
   const { isLoading, mutateAsync } = useCreateCalendar();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = async (data: CreateCalendar) => {
     try {
       await mutateAsync(data);
+      setIsModalOpen(false);
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorMessage(
@@ -37,7 +39,11 @@ export const AddCalendar = () => {
   };
 
   return (
-    <Modal.Root className="h-full">
+    <Modal.Root
+      className="h-full"
+      isModalOpen={isModalOpen}
+      setModalOpen={setIsModalOpen}
+    >
       <Modal.Trigger variant={"outline"} className="rounded-2xl h-full">
         <Plus />
       </Modal.Trigger>
