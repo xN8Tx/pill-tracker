@@ -384,7 +384,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    days: Schema.Attribute.Integer;
+    days: Schema.Attribute.Integer & Schema.Attribute.Required;
     icon: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -393,15 +393,16 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    startDate: Schema.Attribute.Date;
-    title: Schema.Attribute.String;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -420,21 +421,22 @@ export interface ApiPillPill extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dailyCount: Schema.Attribute.Decimal;
-    fullCount: Schema.Attribute.Integer;
+    dailyCount: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    fullCount: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::pill.pill'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    startDate: Schema.Attribute.Date;
-    title: Schema.Attribute.String;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
-    >;
+    > &
+      Schema.Attribute.Required;
   };
 }
 
