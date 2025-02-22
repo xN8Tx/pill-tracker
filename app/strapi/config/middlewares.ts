@@ -2,16 +2,7 @@ export default [
   "strapi::logger",
   "strapi::errors",
   "strapi::security",
-  {
-    name: "strapi::cors",
-    config: {
-      enabled: true,
-      origin: "https://pill.shteyn-web.ru",
-      methods: "*",
-      headers: "*",
-      keepHeaderOnError: true,
-    },
-  },
+  "strapi::cors",
   "strapi::poweredBy",
   "strapi::query",
   "strapi::body",
