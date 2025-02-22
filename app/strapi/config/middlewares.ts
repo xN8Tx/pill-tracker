@@ -6,7 +6,7 @@ export default [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ["https://pill.shteyn-web.ru"],
+      origin: "https://pill.shteyn-web.ru",
       methods: "*",
       headers: "*",
       keepHeaderOnError: true,
