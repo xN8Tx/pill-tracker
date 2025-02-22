@@ -9,6 +9,7 @@ interface AreYouSureModalProps {
   title: string;
   triggerProps?: React.ComponentProps<typeof Modal.Trigger>;
   className?: string;
+  disabled?: boolean;
   action:
     | ((value?: unknown) => Promise<unknown>)
     | ((value?: unknown) => unknown);
@@ -20,6 +21,7 @@ export const AreYouSureModal = ({
   className,
   title,
   triggerProps,
+  disabled = false,
 }: AreYouSureModalProps) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
@@ -50,7 +52,9 @@ export const AreYouSureModal = ({
       isModalOpen={isModalOpen}
       setModalOpen={setIsModalOpen}
     >
-      <Modal.Trigger {...triggerProps}>{children}</Modal.Trigger>
+      <Modal.Trigger disabled={disabled} {...triggerProps}>
+        {children}
+      </Modal.Trigger>
       <Modal.Backdrop className="px-4">
         <Modal.Body>
           <Modal.Header>

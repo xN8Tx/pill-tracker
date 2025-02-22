@@ -12,7 +12,7 @@ export const Layout = ({
 
   return (
     <main
-      className="container py-2 mt:py-10 w-full flex flex-col gap-3"
+      className="container py-4 w-full flex flex-col gap-3"
       style={{ height: "100dvh" }}
     >
       {children}

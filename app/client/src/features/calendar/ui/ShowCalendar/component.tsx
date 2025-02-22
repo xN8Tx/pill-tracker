@@ -20,17 +20,21 @@ import { calendarSchema } from "../../validation";
 
 import { Card, AnimatedButton, Input, Modal, Form } from "@/shared/ui";
 import { AreYouSureModal } from "@/widgets";
+import { useIsOnline } from "@/features/isOnline";
 
 type EditCalendarProps = Pick<Calendar, "startDate"> &
   Pick<Calendar, "days"> &
   Pick<Calendar, "title"> &
-  Pick<Calendar, "documentId">;
+  Pick<Calendar, "documentId"> & {
+    disabled?: boolean;
+  };
 
 export const EditCalendar = ({
   startDate,
   days,
   title,
   documentId,
+  disabled = false,
 }: EditCalendarProps) => {
   const {
     register,
@@ -68,7 +72,7 @@ export const EditCalendar = ({
         aria-label="Редактировать"
         variant="secondary"
         className="hover:bg-secondary/30"
-        disabled={isLoading}
+        disabled={disabled || isLoading}
       >
         <Edit />
       </Modal.Trigger>
@@ -165,6 +169,7 @@ export const EditCalendar = ({
 
 export const ShowCalendar = (props: Calendar) => {
   const { title, startDate, days, documentId } = props;
+  const isOnline = useIsOnline();
 
   const { isLoading: isEditLoading } = useEditCalendar();
   const { mutateAsync: deleteCalendar, isLoading: isDeleteLoading } =
@@ -222,6 +227,7 @@ export const ShowCalendar = (props: Calendar) => {
           startDate={startDate}
           days={days}
           documentId={documentId}
+          disabled={!isOnline}
         />
         <AreYouSureModal
           title="Вы уверены, что хотите удалить препарат?"
@@ -229,7 +235,7 @@ export const ShowCalendar = (props: Calendar) => {
           triggerProps={{
             variant: "secondary",
             className: "bg-red-400 hover:bg-red-300",
-            disabled: isEditLoading,
+            disabled: !isOnline || isEditLoading,
           }}
         >
           <Delete />

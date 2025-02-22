@@ -2,7 +2,18 @@ import * as React from "react";
 
 import { cn } from "@/shared/lib";
 
-const Table: any = {};
+interface TableProps {
+  Root: typeof TableRoot;
+  Header: typeof TableHeader;
+  Body: typeof TableBody;
+  Footer: typeof TableFooter;
+  Row: typeof TableRow;
+  Head: typeof TableHead;
+  Cell: typeof TableCell;
+  Caption: typeof TableCaption;
+}
+
+const Table: TableProps = {} as TableProps;
 
 const TableRoot = React.forwardRef<
   HTMLTableElement,

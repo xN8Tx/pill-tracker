@@ -19,15 +19,18 @@ import {
 import { getRemainsDays, getRemainsPills } from "../../lib";
 import { useDeletePill, useEditPill } from "../../hooks";
 import { pillSchema } from "../../validation";
+import { useIsOnline } from "@/features/isOnline";
 
-import { Button, Card, AnimatedButton, Input, Modal, Form } from "@/shared/ui";
+import { Card, AnimatedButton, Input, Modal, Form } from "@/shared/ui";
 import { AreYouSureModal } from "@/widgets";
 
 type EditPillProps = Pick<Pill, "startDate"> &
   Pick<Pill, "fullCount"> &
   Pick<Pill, "dailyCount"> &
   Pick<Pill, "title"> &
-  Pick<Pill, "documentId">;
+  Pick<Pill, "documentId"> & {
+    disabled?: boolean;
+  };
 
 export const EditPill = ({
   startDate,
@@ -35,6 +38,7 @@ export const EditPill = ({
   dailyCount,
   title,
   documentId,
+  disabled = false,
 }: EditPillProps) => {
   const {
     register,
@@ -73,7 +77,7 @@ export const EditPill = ({
         aria-label="Редактировать"
         variant="secondary"
         className="hover:bg-secondary/30"
-        disabled={isLoading}
+        disabled={disabled || isLoading}
       >
         <Edit />
       </Modal.Trigger>
@@ -191,6 +195,7 @@ export const EditPill = ({
 
 export const ShowPills = (props: Pill) => {
   const { title, startDate, fullCount, dailyCount, documentId } = props;
+  const isOnline = useIsOnline();
 
   const { mutateAsync: editPill, isLoading: isEditLoading } = useEditPill();
   const { mutateAsync: deletePill, isLoading: isDeleteLoading } =
@@ -260,14 +265,16 @@ export const ShowPills = (props: Pill) => {
           fullCount={fullCount}
           dailyCount={dailyCount}
           documentId={documentId}
+          disabled={!isOnline}
         />
         <AreYouSureModal
           title="Вы уверены, что хотите ообновить кол-во препарата?"
           action={refreshHandler}
+          disabled={!isOnline}
           triggerProps={{
             variant: "secondary",
             className: "hover:bg-secondary/30",
-            disabled: isEditLoading,
+            disabled: !isOnline || isEditLoading,
           }}
         >
           <TimerReset />
@@ -278,7 +285,7 @@ export const ShowPills = (props: Pill) => {
           triggerProps={{
             variant: "secondary",
             className: "bg-red-400 hover:bg-red-300",
-            disabled: isEditLoading,
+            disabled: !isOnline || isEditLoading,
           }}
         >
           <Delete />

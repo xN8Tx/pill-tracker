@@ -1,16 +1,9 @@
 import { RouteObject } from "react-router-dom";
-import { lazy, Suspense } from "react";
 
+import { RegisterPage } from "./ui/RegisterPage";
 import { LogoutPage } from "./ui/LogoutPage";
-import { Skeleton } from "./ui/Skeleton";
+import { LoginPage } from "./ui/LoginPage";
 import { Layout } from "./ui/Layout";
-
-const LoginPage = lazy(() =>
-  import("./ui/LoginPage").then((mod) => ({ default: mod.LoginPage })),
-);
-const RegisterPage = lazy(() =>
-  import("./ui/RegisterPage").then((mod) => ({ default: mod.RegisterPage })),
-);
 
 export const authRouter: RouteObject = {
   path: "/auth",
@@ -18,19 +11,11 @@ export const authRouter: RouteObject = {
   children: [
     {
       index: true,
-      element: (
-        <Suspense fallback={<Skeleton />}>
-          <LoginPage />
-        </Suspense>
-      ),
+      element: <LoginPage />,
     },
     {
       path: "register",
-      element: (
-        <Suspense fallback={<Skeleton />}>
-          <RegisterPage />
-        </Suspense>
-      ),
+      element: <RegisterPage />,
     },
     {
       path: "logout",
