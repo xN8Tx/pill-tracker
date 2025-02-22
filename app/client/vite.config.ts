@@ -43,6 +43,9 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    allowedHosts: ["pill.shteyn-web.ru"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
