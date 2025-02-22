@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "docker compose -f ./config/dev/docker-compose.yaml up --build -d",
-    "start": "./config/prod/start.sh",
+    "start": "docker-compose -f ./config/prod/docker-compose.yaml up --build -d",
     "prepare": "husky",
     "lint:client": "cd app/client && yarn lint",
     "lint": "yarn lint:client",
