@@ -24,6 +24,5 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             git reset --hard origin/main  
             git pull origin main          
-            chmod +x start.sh             
-            ./start.sh 
+            docker-compose up --build -d 
           EOF

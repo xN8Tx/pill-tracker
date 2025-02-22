@@ -1,1 +1,1 @@
-export const API_URL = "http://192.168.0.27:1337/api";
+export const API_URL = "https://pill.shteyn-web.ru/api";

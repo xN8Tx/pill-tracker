@@ -1,0 +1,26 @@
+services:
+  pill_table_strapi_prod:
+    container_name: pill-table-strapi-prod
+    build:
+      context: ../../app/strapi
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - ./strapi.env
+    volumes:
+      - ../../app/strapi/public:/opt/app/public
+      - ../../app/strapi/.tmp:/opt/app/.tmp
+    expose:
+      - 1333
+    ports:
+      - 1333:1337
+  pill_table_client_prod:
+    container_name: pill-table-client-prod
+    build:
+      context: ../../app/client
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 3003
+    ports:
+      - 3003:4173
